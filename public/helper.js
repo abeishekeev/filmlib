@@ -1,5 +1,5 @@
 // Populate dropdown menu with all the available genres
-const populateDropDown = (genres) => {
+const populateGenreDropdown = (genres) => {
     const select = document.getElementById('genres')
 
     for (const genre of genres) {
@@ -10,10 +10,17 @@ const populateDropDown = (genres) => {
     }
 };
 
+// Returns the current genre selection from the dropdown menu
 const getSelectedGenre = () => {
-    const selectedGenre = document.getElementById('genres').value;  
+    const selectedGenre = document.getElementById('genres').value;
     return selectedGenre;
-}
+};
+
+// Displays the like and dislike buttons on the page
+const showBtns = () => {
+    const btnDiv = document.getElementById('likeOrDislikeBtns');
+    btnDiv.removeAttribute('hidden');
+};
 
 // Clear the current movie from the screen
 const clearCurrentMovie = () => {
@@ -23,38 +30,17 @@ const clearCurrentMovie = () => {
     movieTextDiv.innerHTML = '';
 }
 
-
-// Returns a random movie from the first page of movies
-const getRandomMovie = (movies) => {
-    const randomIndex = Math.floor(Math.random() * movies.length);
-    const randomMovie = movies[randomIndex];
-    return randomMovie;
+// After liking a movie, clears the current movie from the screen and gets another random movie
+const likeMovie = () => {
+    clearCurrentMovie();
+    showRandomMovie();
 };
 
-
-// Uses the DOM to create HTML to display the movie
-const displayMovie = (movieInfo) => {
-    const moviePosterDiv = document.getElementById('moviePoster');
-    const movieTextDiv = document.getElementById('movieText');
-    const likeBtn = document.getElementById('likeBtn');
-    const dislikeBtn = document.getElementById('dislikeBtn');
-  
-    // Create HTML content containing movie info
-    const moviePoster = createMoviePoster(movieInfo.poster_path);
-    const titleHeader = createMovieTitle(movieInfo.title);
-    const overviewText = createMovieOverview(movieInfo.overview);
-  
-    // Append title, poster, and overview to page
-    moviePosterDiv.appendChild(moviePoster);
-    movieTextDiv.appendChild(titleHeader);
-    movieTextDiv.appendChild(overviewText);
-  
-    showBtns();
-    likeBtn.onclick = likeMovie;
-    dislikeBtn.onclick = dislikeMovie;
+// After disliking a movie, clears the current movie from the screen and gets another random movie
+const dislikeMovie = () => {
+    clearCurrentMovie();
+    showRandomMovie();
 };
-
-
 
 // Create HTML for movie poster
 const createMoviePoster = (posterPath) => {
@@ -85,20 +71,31 @@ const createMovieOverview = (overview) => {
     return overviewParagraph;
 };
 
-
-// After liking a movie, clears the current movie from the screen and gets another random movie
-const likeMovie = () => {
-    clearCurrentMovie();
-    showRandomMovie();
+// Returns a random movie from the first page of movies
+const getRandomMovie = (movies) => {
+    const randomIndex = Math.floor(Math.random() * movies.length);
+    const randomMovie = movies[randomIndex];
+    return randomMovie;
 };
 
-// After disliking a movie, clears the current movie from the screen and gets another random movie
-const dislikeMovie = () => {
-    clearCurrentMovie();
-    showRandomMovie();
-};
-
-const showBtns = () => {
-    const btnDiv = document.getElementById('likeOrDislikeBtns');
-    btnDiv.removeAttribute('hidden');
+// Uses the DOM to create HTML to display the movie
+const displayMovie = (movieInfo) => {
+    const moviePosterDiv = document.getElementById('moviePoster');
+    const movieTextDiv = document.getElementById('movieText');
+    const likeBtn = document.getElementById('likeBtn');
+    const dislikeBtn = document.getElementById('dislikeBtn');
+  
+    // Create HTML content containing movie info
+    const moviePoster = createMoviePoster(movieInfo.poster_path);
+    const titleHeader = createMovieTitle(movieInfo.title);
+    const overviewText = createMovieOverview(movieInfo.overview);
+  
+    // Append title, poster, and overview to page
+    moviePosterDiv.appendChild(moviePoster);
+    movieTextDiv.appendChild(titleHeader);
+    movieTextDiv.appendChild(overviewText);
+  
+    showBtns();
+    likeBtn.onclick = likeMovie;
+    dislikeBtn.onclick = dislikeMovie;
 };

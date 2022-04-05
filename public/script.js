@@ -74,5 +74,5 @@ const showRandomMovie = async () => {
 
 
 
-getGenres().then(populateDropDown);
-playBtn.onclick = showRandomMovie;
+  getGenres().then(populateGenreDropdown);
+  playBtn.onclick = showRandomMovie;
