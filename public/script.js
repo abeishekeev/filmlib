@@ -1,27 +1,24 @@
-const apiKey = 'ec73e3e1a5e1e31683536fdb3a643d3a';
+const apiKey = '64e82c2a8cea7e35b78b3a4128e60406';
 const baseUrl = 'https://api.themoviedb.org/3';
 const playBtn = document.getElementById('playBtn');
 
 // function to get list of genres from API
 
 const getGenres = async () => {
-    const genreListEndpoint = '/genre/movie/list';
-    const request = `?api_key=${apiKey}`;
-    const fetchUrl = `${baseUrl}${genreListEndpoint}${request}`;
-
+    const genreRequestEndpoint = '/genre/movie/list';
+    const requestParams = `?api_key=${apiKey}`;
+    const urlToFetch = `${baseUrl}${genreRequestEndpoint}${requestParams}`;
     try{
-        
-        const response = await fetch(fetchUrl);
-        if(response.ok){
-            const responseJson = await response.json();
-            const genres = response.genres;
-            return genres;
-        }
+      const response = await fetch(urlToFetch);
+      if(response.ok){
+        const jsonResponse = await response.json();
+        const genres = jsonResponse.genres;
+        return genres;
+      }
+    }catch(error){
+     console.log(error);
     }
-    catch(error){
-        console.log(error);
-    }
-}
+  };
 
 
 const getMovies = async () => {
