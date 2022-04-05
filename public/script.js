@@ -1,5 +1,5 @@
 const apiKey = 'ec73e3e1a5e1e31683536fdb3a643d3a';
-const baseUrl = 'https://developers.themoviedb.org/3';
+const baseUrl = 'https://api.themoviedb.org/3';
 const playBtn = document.getElementById('playBtn');
 
 // function to get list of genres from API
